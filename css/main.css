@@ -42,21 +42,6 @@ body {
   	margin:12px;
   }
   
-  #stage.theme button.btn{
-  	border: 2px solid #222;
-  	-webkit-border-radius: 9px;
-  	border-radius: 9px;
-  	text-align:center;
-  	display:block;
-  	background:#eee;
-  	width:280px;
-  	color:#222;
-  	font-size:1.3em;
-  	text-decoration:none;
-  	padding:1.0em 0;
-  	margin:12px;
-  }
-  
   #stage.theme input.textbox{
   	border: 2px solid #222;
   	-webkit-border-radius: 9px;

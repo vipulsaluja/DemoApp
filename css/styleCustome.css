@@ -1,0 +1,236 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*customized*/
+.ui-btn .iconCamera {
+	background: url(../img/iconSprite.png) no-repeat -14px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn:hover .iconCamera {
+	background: url(../img/iconSprite.png) no-repeat -45px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn .iconscanning {
+	background: url(../img/iconSprite.png) no-repeat -80px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn:hover .iconscanning {
+	background: url(../img/iconSprite.png) no-repeat -107px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn .iconlocation {
+	background: url(../img/iconSprite.png) no-repeat -137px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn:hover .iconlocation {
+	background: url(../img/iconSprite.png) no-repeat -162px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn .iconosevent {
+	background: url(../img/iconSprite.png) no-repeat -187px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn:hover .iconosevent {
+	background: url(../img/iconSprite.png) no-repeat -214px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn .iconticket {
+	background: url(../img/iconSprite.png) no-repeat -250px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+.ui-btn:hover .iconticket {
+	background: url(../img/iconSprite.png) no-repeat -283px -7px;
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: -21px;
+	left: 35%;
+}
+
+/*overwirght*/
+.ui-navbar .ui-btn-inner {
+	padding-top: 2.2em !important;
+}
+
+.ui-btn-innerlogout {
+	padding: 0.55em 11px 0.5em
+}
+
+.ui-btn-active {
+	background: -moz-linear-gradient(center top, #ffa267, #f9823a) repeat
+		scroll 0 0 #4596CE !important;
+}
+
+.gridwidthA {
+	width: 47% !important;
+}
+
+.gridwidthB {
+	width: 2% !important;
+	border-left: 1px solid #fff !important;
+}
+
+.gridwidthRow {
+	width: 2% !important;
+	border-left: 1px solid #000 !important;
+}
+
+.cWhite {
+	color: #fff !important;
+	text-shadow: 0 -1px 1px #000 !important;
+}
+
+div.ui-btn {
+	background: none !important;
+	padding: 0 !important;
+}
+
+.menuicon {
+	min-width: 50px;
+	min-height: 50px;
+	width: 20%;
+}
+
+.menutitile {
+	color: #496b9b !important;
+	text-decoration: none !important;
+}
+
+input.ui-input-text {
+	border-radius: 0px 0px 0px 0px !important;
+}
+
+.iconGeoLocation {
+	background: url(../img/gps_pin_location.png);
+	width: 18px;
+	height: 18px;
+	position: absolute;
+}
+
+.customizedButton {
+	display: inline-block;
+	left: 10px;
+	position: relative;
+	top: -11px;
+}
+
+.customizedButton .ui-btn {
+	border-radius: 3px !important;
+	top: -20px !important;
+}
+
+textarea.ui-input-text {
+	width: 75% !important;
+	display: inline-block;
+}
+
+a[data-rel='custom'],.ui-header a[data-rel='custom'] {
+	background: transparent url(images/backButtonSprite.png) 0 0 no-repeat
+		!important;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+	border: 0 none !important;
+	height: 30px;
+}
+
+a[data-rel='custom'] .ui-btn-inner {
+	background: transparent url(images/backButtonSprite.png) right 0
+		no-repeat !important;
+	margin: 0 0 0 15px;
+	padding: 0 8px 0 0 !important;
+	height: 30px;
+	line-height: 30px;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+a[data-rel='custom'] .ui-icon {
+	display: none;
+}
+
+/* === BLACK - BACK BUTTON === */
+.ui-bar-b a[data-rel='custom'] {
+	background-position: 0 -30px !important;
+}
+
+.ui-bar-b a[data-rel='custom'] .ui-btn-inner {
+	background-position: right -30px !important;
+}
+
+.ui-btn-hover-a,.ui-btn-down-a {
+	font-family: Helvetica, Arial, sans-serif /*{a-button-font}*/;
+	text-decoration: none;
+	border: 1px solid #222 !important;
+	background-image:-moz -linear-gradient(50% 0%, rgb(137, 160, 190) 0%, rgb(88, 119, 162) 50%, rgb(72, 106, 154) 51%, rgb(74, 108, 155) 100%);
+}
+.header
+{
+	position:fixed !important; 
+	z-index:999;
+}
+
+.contentContainer
+{
+	margin-top: 40px !important;
+}
+
+.plusIcon 
+{
+   font-weight: bold !important;
+}
+
+#headerEditRecord {
+    left: 0;
+    position: absolute;
+    top: 0;
+}

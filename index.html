@@ -1,104 +1,174 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <link rel="stylesheet" type="text/css" href="css/main.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-    <body id="stage" class="theme">
-        <a href="#" class="btn" onclick="capturePhoto();">CapturePhoto</a><br>
-        <a href="#" class="btn" onclick="scanCode();">Scan QR Code</a><br>
-        <a href="#" class="btn" onclick="getLocation();">Get Location</a><br>
-        <a href="#" class="btn" onclick="checkConnection();">Check Connection</a><br>
-                <!-- <a href="form.html" class="btn" target="_blank">Add Data</a><br>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="css/jquery.mobile-1.0rc2.min.css" type="text/css"
+	rel="stylesheet" />
 
-        <a href="#" class="btn" onclick="getPhoto(pictureSource.PHOTOLIBRARY);">Scan Code</a><br>
-        <a href="#" class="btn" onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">Scan Code</a><br>
-        -->
-        <p id="geolocation"></p>
-         	<img id="myImage" src="" style="width:100px;height:100px;" />      
-    </body>
-        <script type="text/javascript" src="cordova-2.0.0.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/barcodescanner.js"></script>
-        <script type="text/javascript">
+<link href="css/jquery.mobile-1.0rc2.min.css" rel="stylesheet">
+<link href="css/styleCustome.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="css/styles-iphone.css" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Debri Management System</title>
+<style>
+#footerTabs {
+	background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
+}
+
+.ui-listview sup {
+	font-size: 0.6em;
+	color: #cc0000;
+}
+</style>
+	<script type="text/javascript" src="phonegap.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/barcodescanner.js"></script>
+	<script type="text/javascript" src="js/bluetooth.js"></script>
+	<script src="js/jquery-1.6.4.js"></script>
+	<script src="js/jquery.mobile-1.0rc2.min.js"></script>
+	<script src="js/signatureCapture.js"></script>
+	<script type="text/javascript" src="js/dataStorage.js"></script>
+	<script src="js/signatureCapture.js"></script>	
+	<script src="js/modernizr.custom.34982.js"></script>
+	<script src="js/zoomUtility.js"></script>
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-biTBfCDdQIFDhWu67n55k9RM4bG5Ugk&sensor=true">
+    </script>
+<script type="text/javascript">
             app.initialize();
-            function capturePhoto()
-			{      
-				// Take picture using device camera and retrieve image as base64-encoded string
-				navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
-				{ 
-					quality: 20,
-					destinationType: Camera.DestinationType.FILE_URI,
-					targetWidth: 100,
-  					targetHeight: 100  });
-				navigator.notification.alert(
-		        'Your Photo has been uploaded',  // message
-		        okay,                           // callback
-		        'Photo Uploaded',              // title
-		        'OK'     
-		        );
-			}  
-			
-						function onPhotoDataSuccess(imageURI)
-			{     
-				var image = document.getElementById('myImage');
-				image.src = imageURI;
-			}
-			
-						function onFail(message)
-			{      
-				alert('Failed because: ' + message);  
-			}
-			
-			function getLocation()
-	{
-		var element = document.getElementById('geolocation');
-		element.innerHTML = 'Finding Location...'
-		navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true});
-	}
+
+     function centerHorizontally(objectID) 
+    {
+        var thisObj = document.getElementById(objectID);
+        var width = (window.innerWidth) ? window.innerWidth :   document.body.clientWidth;
+		var height = (window.innerHeight) ? window.innerHeight :   document.body.clientHeight;
+		//alert("clientHeight   " + document.body.clientHeight);
+		
+        var objectWidth = parseInt(thisObj.style.width);
+        var objectHeight = parseInt(thisObj.style.height);
+		//alert(objectHeight);
+		
 	
-	function onSuccess(position)
-	{
-		var element = document.getElementById('geolocation');
-		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-	    		            'Longitude: '          + position.coords.longitude             + '<br />' +
-	            		    'Altitude: '           + position.coords.altitude              + '<br />' +
-	                		'Accuracy: '           + position.coords.accuracy              + '<br />' +
-	    		            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-	                		'Heading: '            + position.coords.heading               + '<br />' +
-	                		'Speed: '              + position.coords.speed                 + '<br />' +
-	                		'Timestamp: '          + position.timestamp          		   + '<br />';
-	}
+        var newLocation = (width - objectWidth) / 2;
+		var newLocationH = (height - objectHeight) / 2;
+		
+		//alert( newLocationH);
+		newLocation=newLocation+10;
+		//newLocationH=newLocationH+550;
+        //thisObj.style.left = newLocation +'px';
 	
-	// onError Callback receives a PositionError object
-	//
-	function onError(error) {
-	    alert('code: '    + error.code    + '\n' +
-	          'message: ' + error.message + '\n');
-	}
-        </script>
-    </body>
+        thisObj.style.top = (newLocationH -61) +'px';
+		
+    }
+	
+    function MakeCenter()
+    {     
+        centerHorizontally('trgtDiv');
+        //centerVertically('trgtDiv');
+    }
+    </script>
+
+<script>
+	    // all dialog buttons should close their parent dialog
+	    $(".ui-dialog button").live("click", function () {
+	        $("[data-role='dialog']").dialog("close");
+	    });
+	    $(document).live("mobileinit", function () {
+
+	        $.mobile.defaultPageTransition = "slide";
+			var dmslogo = $("#dmslogo");
+				var windowH = $(window).height();
+				var windowW = $(window).width();
+				dmslogo.css({
+				 position:"fixed",
+				 left: ((windowW - $loading.outerWidth())/2 + $(document).scrollLeft()),
+				 top: ((windowH - $loading.outerHeight())/2 + $(document).scrollTop())
+				})
+			
+	    });
+		
+		
+	</script>
+
+
+<script>
+    
+	$(document).ready(function(e) {
+        
+		$(function(){
+		var windowH = $(window).height();
+		var wrapperH = $('#wrapper').height();
+		if(windowH > wrapperH) {                            
+			$('#wrapper').css({'height':($(window).height())-500 +'px'});
+		}                                                                               
+		$(window).resize(function(){
+			var windowH = $(window).height();
+			var wrapperH = $('#wrapper').height();
+			var differenceH = windowH - wrapperH;
+			var newH = (wrapperH + differenceH)-500;
+			var truecontentH = $('#truecontent').height();
+			if(windowH > truecontentH) {
+				$('#wrapper').css('height', (newH)+'px');
+			}
+	
+		})          
+});	
+		
+		
+		
+    });
+	
+	
+    
+    </script>
+
+</head>
+<body class="ui-mobile-viewport ui-overlay-b" onload="MakeCenter()"
+	onResize="MakeCenter()">
+	<div data-role="page" id="page1" data-theme="a"
+		style="position: relative">
+		<div
+			style="width: 100%; height: 74px; position: relative; background: url(img/billie_holiday.png) repeat-x;"
+			align="center">
+			<img src="img/oBriens.PNG" alt="image"
+				style="width: 70%; height: 74px; max-width: 320px" />
+		</div>
+		<div id="wrapper">
+			<div
+				style="width: 100%; height: 100%; position: relative; text-align: center; height: 100px"
+				id="trgtDiv">
+				<img src="img/DebrisPro_v4.png" alt="image"
+					style="width: 70%; max-width: 278px;" />
+			</div>
+		</div>
+		<div data-role="content"></div>
+		<div data-role="navbar" data-iconpos="top" class="ui-navbar ui-mini"
+			role="navigation" data-position="fixed"
+			style="position: absolute; bottom: 0; width: 100%">
+			<ul>
+				<li><a data-transition="slideup" data-theme="a"
+					onclick="capturePhoto();"> <span class="iconCamera"></span>
+						Camera
+				</a></li>
+				<li><a href="#page1" data-transition="slideup" data-theme="a"
+					onclick="scanCode();"> <span class="iconscanning"></span>
+						Scanning
+				</a></li>
+				<li><a href="geoLocation.html" data-transition="slideup" data-theme="a"
+					> <span class="iconlocation"></span>
+						Location
+				</a></li>
+				<li><a href="AddDisplay1.html?backId=index"
+					data-transition="slideup" data-theme="a"> <span
+						class="iconticket"></span> Tickets
+				</a></li>
+				<li><a href="IconsTools.html" data-transition="slideup"
+					data-theme="a"> <span class="iconosevent"></span> More...
+				</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
 </html>

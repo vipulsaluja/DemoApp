@@ -32,132 +32,172 @@ var app = {
     //
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
-    onDeviceReady: function() {   
-        //document.addEventListener("online", onOnline, false);
-        //document.addEventListener("offline", onOffline, false);
-        //document.addEventListener("startcallbutton", onStartCallKeyDown, false);
-        //document.addEventListener("endcallbutton", onEndCallKeyDown, false);
-        //db.transaction(populateDB, errorCB, successCB);
+    onDeviceReady: function() {
         app.receivedEvent('deviceready');
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
+        var parentElement = document.getElementById(id);
+        var listeningElement = parentElement.querySelector('.listening');
+        var receivedElement = parentElement.querySelector('.received');
+
+        listeningElement.setAttribute('style', 'display:none;');
+        receivedElement.setAttribute('style', 'display:block;');
+
         console.log('Received Event: ' + id);
     }
-    
 };
+var pictureSource;   // picture source
+var destinationType;
+function checkConnection() 
+{
+    var networkState = navigator.network.connection.type;
 
-//        var db = window.openDatabase("Dummy_DB", "1.0", "Just a Dummy DB", 200000);
+    var states = {};
+    states[Connection.UNKNOWN]  = 'Unknown connection';
+    states[Connection.ETHERNET] = 'Ethernet connection';
+    states[Connection.WIFI]     = 'WiFi connection';
+    states[Connection.CELL_2G]  = 'Cell 2G connection';
+    states[Connection.CELL_3G]  = 'Cell 3G connection';
+    states[Connection.CELL_4G]  = 'Cell 4G connection';
+    states[Connection.NONE]     = 'No network connection';
 
-	function getLocation()
-	{
-		var element = document.getElementById('geolocation');
-		element.innerHTML = 'Finding Location...'
-		navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true});
-	}
+    alert('Connection type: ' + states[networkState]);
+}
+
+function getLocation()
+{
+	//var element = document.getElementById('geolocation');
+	//element.innerHTML = 'Finding Location...'
+	$.mobile.changePage("geoLocation.html");
+	navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true});
+}
+
+function onSuccess(position)
+{
+	//var element = document.getElementById('geolocation');
 	
-	function onSuccess(position)
-	{
-		var element = document.getElementById('geolocation');
-		element.innerHTML = 'Latitude: '           + position.coords.latitude              + '<br />' +
-	    		            'Longitude: '          + position.coords.longitude             + '<br />' +
-	            		    'Altitude: '           + position.coords.altitude              + '<br />' +
-	                		'Accuracy: '           + position.coords.accuracy              + '<br />' +
-	    		            'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '<br />' +
-	                		'Heading: '            + position.coords.heading               + '<br />' +
-	                		'Speed: '              + position.coords.speed                 + '<br />' +
-	                		'Timestamp: '          + position.timestamp          		   + '<br />';
-	}
+	//element.innerHTML
+	var alertMessage = 'Latitude: '           + position.coords.latitude              + '\n' +
+    'Longitude: '          + position.coords.longitude             + '\n' +
+    'Altitude: '           + position.coords.altitude              + '\n' +
+	'Accuracy: '           + position.coords.accuracy              + '\n' +
+    'Altitude Accuracy: '  + position.coords.altitudeAccuracy      + '\n' +
+	'Heading: '            + position.coords.heading               + '\n' +
+	'Speed: '              + position.coords.speed                 + '\n' +
+	'Timestamp: '          + position.timestamp          		   + '\n';
+
+	var mapCanvas = $("#map-canvas");
+	var locationHeader = $("#headerLocation");
+		var windowH = $(window).height();
+		var windowW = $(window).width();
+		mapCanvas.css({
+		 height : windowH - locationHeader.height(),
+		})
+		//var mapType = new google.maps.ImageMapType({
+        //        tileSize: new google.maps.Size(256,256),
+        //        getTileUrl: function(coord,zoom) {
+        //            return 'img/tiles/'+zoom+'/'+coord.x+'/'+coord.y+'.png';
+        //        }
+        //    });
+		var geocoder = new google.maps.Geocoder();
+		var address = '';
+    			var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    		    geocoder.geocode({'latLng': latlng}, function(results, status) {
+    		      if (status == google.maps.GeocoderStatus.OK) {
+    		        if (results[1]) {
+    		          address = results[1].formatted_address
+    		        }
+    		      } else {
+    		        alert("Geocoder failed due to: " + status);
+    		      }
+    		    });
+    	var infoWindow = new google.maps.InfoWindow();
+    	var mapOptions = {
+    	          center: latlng,
+    	          zoom: 11,
+    	          mapTypeId: google.maps.MapTypeId.ROADMAP
+    	        };
+    	var map = new google.maps.Map(document.getElementById("map-canvas"),
+    	            mapOptions);
+    	var marker = new google.maps.Marker({
+    	        	position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
+    	        	map: map,
+    	        	animation: google.maps.Animation.DROP
+    	      		});
+    	//map.overlayMapTypes.insertAt(0, mapType);
+    	//google.maps.addListenerOnce(map, 'idle', function() { document.getElementById("map_canvas").style.visibility = "visible";});
+    	      	google.maps.event.addListener(marker, 'click', (function(marker) {
+    	        return function() {
+    	        	 if (marker.getAnimation() != null) {
+    	        		    marker.setAnimation(null);
+    	        		  } else {
+    	        		    marker.setAnimation(google.maps.Animation.BOUNCE);
+    	        		  }
+    	          infoWindow.setContent(address);
+    	          infoWindow.open(map, marker);
+    	        }
+    	      })(marker)); 
+}
+
+// onError Callback receives a PositionError object
+//
+function onError(error) {
+	$.mobile.changePage("index.html");
+    alert('Unable to retrieve Location \n Error Code: '    + error.code    + '\n' +
+          'Message: ' + error.message + '\n');
+}
+
+function capturePhoto()
+{      
+	$.mobile.changePage("CapturedImage.html");
+	pictureSource=navigator.camera.PictureSourceType;
+    destinationType=navigator.camera.DestinationType;
+	// Take picture using device camera and retrieve image as base64-encoded string
+	navigator.camera.getPicture(onPhotoDataSuccess, onFail, 
+	{ 
+		quality: 50,
+		destinationType: Camera.DestinationType.FILE_URI,
+    });
 	
-	// onError Callback receives a PositionError object
-	//
-	function onError(error) {
-	    alert('code: '    + error.code    + '\n' +
-	          'message: ' + error.message + '\n');
-	}
+}
+
+function getPhoto(source) {
+    // Retrieve image file location from specified source
+    navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+      destinationType: Camera.DestinationType.FILE_URI,
+      sourceType: source });
+  }
+
+function onPhotoDataSuccess(imageURI)
+{     
+	//alert(imageURI);
+	var element = document.getElementById('capturedImage');
 	
+	element.src = imageURI
+}
+
+function onFail(message)
+{      
+	$.mobile.changePage("index.html");
+	alert('Failed because: ' + message);  
 	
-	function onStartCallKeyDown() 
-	{
-		alert("Call Button" ); 
-	}
-	
-	function onEndCallKeyDown() 
-	{
-		alert("End Call Button" ); 
-	}
-	
-	function onOnline() 
-	{
-		alert("Internet Available" );
-	}
-	
-	function onOffline() 
-	{
-		alert("Internet Not Available");
-	}
-	
-	function onBatteryLow(info) 
-	{
-		alert("Battery Level Low " + info.level + "%"); 
-	}
-	
-	function checkConnection() 
-	{
-	    var networkState = navigator.network.connection.type;
-	
-	    var states = {};
-	    states[Connection.UNKNOWN]  = 'Unknown connection';
-	    states[Connection.ETHERNET] = 'Ethernet connection';
-	    states[Connection.WIFI]     = 'WiFi connection';
-	    states[Connection.CELL_2G]  = 'Cell 2G connection';
-	    states[Connection.CELL_3G]  = 'Cell 3G connection';
-	    states[Connection.CELL_4G]  = 'Cell 4G connection';
-	    states[Connection.NONE]     = 'No network connection';
-	
-	    alert('Connection type: ' + states[networkState]);
-	}
-			
-			
-	function populateDB(tx) {
-		//tx.executeSql('CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT NOT NULL, Project TEXT NOT NULL)');
-	}
-	
-    // Transaction success callback
+}
+
+function onPhotoURISuccess(imageURI) {
+    // Uncomment to view the image file URI 
+    // console.log(imageURI);
+
+    // Get image handle
     //
-    function successCB() {
-        //db.transaction(queryDB,errorCB);
-    }
-    
-    	function queryDB(tx) {
-        //tx.executeSql('SELECT * FROM SoccerPlayer',[],querySuccess,errorCB);      
-    }
-    
-        function querySuccess(tx, results) { 
-    	var element = document.getElementById('Users');
-    	alert(element);
-    	var innerString = '';
-    	for (var i=0;i<results.rows.length;i++)
-		{
-			var row = results.rows.item(i);
-			innerString = innerString + '<li><a href="#"><h3 class="ui-li-heading">'+row['Name']+'</h3><p class="ui-li-desc">Club '+row['Club']+'</p></a></li>';
-		}
-		element.innerHTML = innerString;
-	}
-    
-    // Transaction error callback
-    //
-    function errorCB(tx, err) {
-        alert("Error processing SQL: "+err);
-    }
-    
-    function addNewRecord(form) {
-    	alert(form);
-    	db.transaction(addRecordDB(form),errorCB);
+    var largeImage = document.getElementById('capturedImage');
 
-    }
-    
-    function addRecordDB(form) {
-		//tx.executeSql('INSERT INTO Users(Name,Project) VALUES ('+form.name+','+form.project+')');
-		//tx.executeSql('SELECT * FROM Users',[],querySuccess,errorCB);  
-    }
+    // Unhide image elements
+    //
+    largeImage.style.display = 'block';
+
+    // Show the captured photo
+    // The inline CSS rules are used to resize the image
+    //
+    largeImage.src = imageURI;
+  }

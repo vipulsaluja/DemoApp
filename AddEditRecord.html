@@ -1,0 +1,51 @@
+
+        <div data-role="page" id="editPage">
+            <div id="headerEditRecord" data-theme="a" data-role="header" class="header">
+                <a data-theme="a" data-rel="back" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Back</span></span></a>
+                <a id="editFormSubmitButton" data-theme="e" class="ui-btn-right cWhite">
+                    Done
+                </a>
+                <h3>
+                </h3>
+            </div>
+            <div data-role="content"  class="contentContainer">
+			<input type="hidden" name="noteId" id="noteId" value="">
+			<input type="hidden" name="locationLatitude" id="locationLatitude" value="">
+			<input type="hidden" name="locationLongitude" id="locationLongitude" value="">
+                <div>
+                    <fieldset  data-mini="true" >
+                        <label for="noteTitle">
+                            Site:
+                        </label>
+                        <input name="noteTitle" id="noteTitle" placeholder=""  type="text"/>
+                    </fieldset>
+                </div>
+                <div> <br></div>
+                <div>
+                    <fieldset>
+                        <label for="noteBody">
+                            Contractor:
+                        </label>
+                        <input name="noteBody" id="noteBody" placeholder=""  type="text"/>
+                        </br>
+                    </fieldset>
+                </div>
+                 <div> <br></div>
+                <div id="locationDiv" class="location">
+            <fieldset >
+            <div class="ui-header" style="background:none !important; box-shadow:none">
+                <label for="location">
+                    Location:
+                </label>
+                <textarea name="" id="location" placeholder="" data-mini="true" data-inline="true" style="" disabled></textarea>
+				   <div class="customizedButton"> 
+				   <a id="editGeoLocation" data-transition="top" data-theme="a" onclick="getAndDisplayLocation();"><img src="img/locationButton.png" width="32" height="32" />
+				   </a></div>	
+                </div>
+            </fieldset>
+        </div>
+
+            </div>
+               <!-- <input id="saveButton" type="submit" data-icon="check" data-iconpos="left" data-theme="b" value="Save" class="saveButton" data-inline="true"/>
+                <input id="deleteButton" type="submit" data-icon="delete" data-iconpos="left" data-theme="b" value="Cancel" class="closeButton" data-inline="true"/>-->
+        </div>

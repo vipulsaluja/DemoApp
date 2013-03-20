@@ -1,0 +1,25 @@
+/* CSS Document */
+
+#canvasContainer {
+	position:relative;
+	width:100%;	
+  	background-color: white;
+}
+
+#signature {
+  width: 100%;
+}
+
+#lowerControls {
+	position:relative;
+	padding-top: 25px;	
+}
+
+#imageSignature {
+	width:100%;
+	visibility: "hidden";
+}
+
+#new {
+	display : none;
+}

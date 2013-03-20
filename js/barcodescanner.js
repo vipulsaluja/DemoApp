@@ -78,7 +78,7 @@ var scanCode = function() {
         function(result) {
         if (result.text)
         {
-	        alert("Scanned Code: " + result.text 
+	        navigator.notification.alert("Scanned Code: " + result.text 
 	                + ". Format: " + result.format
 	                + ". Cancelled: " + result.cancelled);
         }
