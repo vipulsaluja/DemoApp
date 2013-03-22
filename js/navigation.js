@@ -65,8 +65,8 @@ function navigateInit() {
 }
 
 function setTextOnPage(element) {
-    $("#"+element).html("");
-    $("#"+element).html(backButtonText);
+//    $("#"+element).html("");
+//    $("#"+element).html(backButtonText);
 }
 
 function setBackButtonText(text){

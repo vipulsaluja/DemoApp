@@ -7,6 +7,7 @@ var timesClicked = 0;
 var deleteSelectedFlag = false;
 var deleteFlag = false;
 
+
 //Logging is done.
 function doLog(s){
     setTimeout(function(){
@@ -249,6 +250,7 @@ function init(){
    		 $('#addEditTicketText').html("Add Ticket");
    	  }
     });
+    
     //will run after initial show - handles regetting the list
     $("#displayPage1").live("pageshow", function() {
     	$("#addRecordId").click(function() { 
@@ -307,7 +309,7 @@ function init(){
    //  getEntries();
     $("#locationPage").live("pageshow", function() {
         //	alert("Display page loaded");
-    	getLocation();
+    	getLocationn();
         });
 
     $("#signaturePage").live("pageshow", function() {
@@ -328,7 +330,11 @@ function init(){
     		imageSignature.css({
     		 height : windowH - footerSignature.height(),
     		})    	    
-        });    
+        });  
+
+
+    
+    
 	 
 }
 

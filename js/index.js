@@ -16,6 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var isInternetAvailable = false;
 var app = {
     // Application Constructor
     initialize: function() {
@@ -27,6 +28,13 @@ var app = {
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener("offline", function() {
+            alert("No internet connection");
+            isInternetAvailable = false;
+        }, false);
+        document.addEventListener("online", function() {
+        	isInternetAvailable = true;
+        }, false);
     },
     // deviceready Event Handler
     //
@@ -34,6 +42,7 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -65,15 +74,58 @@ function checkConnection()
     alert('Connection type: ' + states[networkState]);
 }
 
-function getLocation(text)
+function getLocationn(text)
 {
 	//var element = document.getElementById('geolocation');
 	//element.innerHTML = 'Finding Location...'
-	setBackButtonText(text);
+	//checkInternetConnection();
+//	if(isInternetAvailable)
+//		{
+//		setBackButtonText(text);
+//		navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true});
+//		}
+//	else
+//		{
+//		alert("Internet not available!");
+//		}
+	$.mobile.changePage("geoLocation.html");
+	navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true})
+}
+function getLocationn()
+{
+	//var element = document.getElementById('geolocation');
+	//element.innerHTML = 'Finding Location...'
+	//checkInternetConnection();
+//	if(isInternetAvailable)
+//		{
+//		setBackButtonText(text);
+//		navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true});
+//		}
+//	else
+//		{
+//		alert("Internet not available!");
+//		}
 	$.mobile.changePage("geoLocation.html");
 	navigator.geolocation.getCurrentPosition(onSuccess, onError,{enableHighAccuracy:true});
-
 }
+
+//function reachableCallback(reachability) {
+//	alert("in cal back of netowrk")
+//    var networkState = reachability.code || reachability;
+//    hasConnection = networkState ==
+//NetworkStatus.REACHABLE_VIA_CARRIER_DATA_NETWORK ||
+//NetworkStatus.REACHABLE_VIA_WIFI_NETWORK;
+//    alert("hasConnection: " + hasConnection); // debug
+//    if (!hasConnection)
+//        alert("No Internet connection found.");
+//    else
+//        alert("Has a connection");
+//}
+//
+//function checkInternetConnection()
+//{
+//    navigator.network.isReachable('google.com', reachableCallback, {});
+//}
 
 function onSuccess(position)
 {
@@ -131,6 +183,7 @@ function onSuccess(position)
             google.maps.event.addListenerOnce(map, "idle", function(event){
                 /* ... */
     		$.mobile.hidePageLoadingMsg();
+    		document.getElementById("map_canvas").style.visibility = "visible";
     		});
     	
     	      	google.maps.event.addListener(marker, 'click', (function(marker) {
@@ -149,15 +202,14 @@ function onSuccess(position)
 // onError Callback receives a PositionError object
 //
 function onError(error) {
-	$.mobile.changePage("index.html");
-    alert('Unable to retrieve Location \n Error Code: '    + error.code    + '\n' +
-          'Message: ' + error.message + '\n');
+	alert("Internet not available!");
 }
 
 function capturePhoto(backButtonText)
 {      
-	setBackButtonText(backButtonText);
 	$.mobile.changePage("CapturedImage.html");
+	setBackButtonText(backButtonText);
+
 	pictureSource=navigator.camera.PictureSourceType;
     destinationType=navigator.camera.DestinationType;
 	// Take picture using device camera and retrieve image as base64-encoded string
@@ -176,6 +228,9 @@ function getPhoto(source) {
       sourceType: source });
   }
 
+
+var imageUrl = "";
+
 function onPhotoDataSuccess(imageURI)
 {     
 	//alert(imageURI);
@@ -184,9 +239,11 @@ function onPhotoDataSuccess(imageURI)
 	element.src = imageURI
 }
 
+var imagePath = '';
+
 function onFail(message)
 {      
-	$.mobile.changePage("index.html"); 
+
 	
 }
 

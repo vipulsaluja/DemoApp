@@ -49,7 +49,7 @@ div.center{padding:20px 0px;}
 
 .customizedButton{display: inline-block;  left: 10px;  position: relative;   top: 0;}
 .customizedButton .ui-btn{border-radius:3px !important; top:-20px !important;}
-textarea.ui-input-text { width: 75% !important; display: inline-block;}
+textarea.ui-input-text { width: 65% !important; display: inline-block;}
 
 a[data-rel='custom'], .ui-header a[data-rel='custom'] {
 	background: transparent url(images/backButtonSprite.png) 0 0 no-repeat !important;
@@ -232,7 +232,3 @@ a:hover[data-rel="back"] .ui-btn-inner {
 	vertical-align: middle !important;
 }
 
-.hoverClass 
-{
-  font-size: 24px !important;	
-}

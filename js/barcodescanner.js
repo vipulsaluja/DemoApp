@@ -73,8 +73,7 @@ if (!window.plugins.barcodeScanner) {
 
 
 
-var scanCode = function(backButtonText) {
-	setBackButtonText(backButtonText);
+var scanCode = function() {
     window.plugins.barcodeScanner.scan(
         function(result) {
         if (result.text)
