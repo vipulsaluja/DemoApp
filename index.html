@@ -4,12 +4,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<link href="css/jquery.mobile-1.0rc2.min.css" type="text/css"
-	rel="stylesheet" />
-
 <link href="css/jquery.mobile-1.0rc2.min.css" rel="stylesheet">
-<link href="css/styleCustome.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/styles-iphone.css" />
+<link href="css/styleCustome.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="css/styles.css" />
 <title>Debri Management System</title>
 <style>
@@ -21,6 +18,16 @@
 	font-size: 0.6em;
 	color: #cc0000;
 }
+.zoom {
+	display:inline-block;
+	position: relative;
+}
+
+/* magnifying glass icon */
+.zoom img {
+	display: block;
+}
+
 </style>
 	<script type="text/javascript" src="phonegap.js"></script>
 	<script type="text/javascript" src="js/index.js"></script>
@@ -33,6 +40,7 @@
 	<script src="js/signatureCapture.js"></script>	
 	<script src="js/modernizr.custom.34982.js"></script>
 	<script src="js/zoomUtility.js"></script>
+	<script src="js/navigation.js"></script>
 <script type="text/javascript"
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-biTBfCDdQIFDhWu67n55k9RM4bG5Ugk&sensor=true">
     </script>
@@ -60,7 +68,9 @@
         //thisObj.style.left = newLocation +'px';
 	
         thisObj.style.top = (newLocationH -61) +'px';
-		
+		if(thisObj.id == 'noRecords') {
+			thisObj.style.top = (newLocationH - 20) +'px';
+		}
     }
 	
     function MakeCenter()
@@ -116,13 +126,10 @@
 		})          
 });	
 		
-		
-		
     });
-	
-	
     
     </script>
+    
 
 </head>
 <body class="ui-mobile-viewport ui-overlay-b" onload="MakeCenter()"
@@ -149,23 +156,23 @@
 			style="position: absolute; bottom: 0; width: 100%">
 			<ul>
 				<li><a data-transition="slideup" data-theme="a"
-					onclick="capturePhoto();"> <span class="iconCamera"></span>
+					onclick="capturePhoto('Home');"> <span class="iconCamera"></span>
 						Camera
 				</a></li>
 				<li><a href="#page1" data-transition="slideup" data-theme="a"
 					onclick="scanCode();"> <span class="iconscanning"></span>
 						Scanning
 				</a></li>
-				<li><a href="geoLocation.html" data-transition="slideup" data-theme="a"
+				<li><a href="geoLocation.html" onclick="setBackButtonText('Home');" data-transition="slideup" data-theme="a"
 					> <span class="iconlocation"></span>
 						Location
 				</a></li>
-				<li><a href="AddDisplay1.html?backId=index"
+				<li><a href="AddDisplay1.html?backId=index" onclick="setBackButtonText('Home');"
 					data-transition="slideup" data-theme="a"> <span
 						class="iconticket"></span> Tickets
 				</a></li>
-				<li><a href="IconsTools.html" data-transition="slideup"
-					data-theme="a"> <span class="iconosevent"></span> More...
+				<li><a href="IconsTools.html" data-transition="slideup" onclick="setBackButtonText('Home');"
+					data-theme="a"> <span class="iconosevent"></span>&nbsp;More
 				</a></li>
 			</ul>
 		</div>

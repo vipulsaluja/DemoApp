@@ -5,61 +5,66 @@
 			class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a"
 			data-corners="true" data-shadow="true" data-iconshadow="true"
 			data-wrapperels="span"><span
-			class="ui-btn-inner ui-btn-corner-all"><span
-				class="ui-btn-text">Back</span></span></a>
+			class="ui-btn-inner ui-btn-corner-all"><span id="backMore"
+				class="ui-btn-text" onclick="updateBackFlag();">Back</span></span></a>
 		<h3>Tools</h3>
 	</div>
 	<div data-role="content" class="contentContainer">
+    
+    
 		<div class="ui-grid-a">
 			<div class="ui-block-a center">
-				<a href="Signature.html" class="ui-link menutitile">
+				<a href="Signature.html" onclick="setBackButtonText('Tools');" class="ui-link menutitile">
 					<div align="center">
-						<img class="icon menuicon" src="img/signature.png" />
+						<img id="img0" class="icon menuicon" onmousedown="change('img0','img/signature.png')" onmouseover="change('img0','img/signature.png')" onmouseup="change('img0','img/signature_hover.png')" onmouseout="change('img0','img/signature_hover.png')" src="img/signature_hover.png" border="0"/>
 					</div>
-					<div align="center">Signature</div>
+					<div align="center" onmouseover="change('img0','img/signature.png')" onmouseout="change('img0','img/signature_hover.png')">Signature</div>
 				</a>
 			</div>
+            
+            
+            
 			<div class="ui-block-b center">
 				<a class="ui-link menutitile" onclick="checkConnection();">
 					<div align="center">
-						<img class="icon menuicon" src="img/checkConnention.png" />
+						<img id="img1" class="icon menuicon" onmousedown="change('img1','img/checkConnention.png')" onmouseover="change('img1','img/checkConnention.png')" onmouseup="change('img1','img/checkConnention_hover.png')" onmouseout="change('img1','img/checkConnention_hover.png')" src="img/checkConnention_hover.png" border="0"/>
 					</div>
-					<div align="center">Connection</div>
+					<div align="center" onmouseover="change('img1','img/checkConnention.png')" onmouseout="change('img1','img/checkConnention_hover.png')">Connection</div>
 				</a>
 			</div>
 
 			<div class="ui-block-a center">
-				<a class="ui-link menutitile" onclick="scanCode();">
+				<a class="ui-link menutitile" onclick="scanCode('Tools');">
 					<div align="center">
-						<img class="icon menuicon" src="img/QR-Code.png" />
+						<img id="img2" class="icon menuicon" onmousedown="change('img2','img/QR-Code.png')" onmouseover="change('img2','img/QR-Code.png')" onmouseup="change('img2','img/QR-Code_hover.png')" onmouseout="change('img2','img/QR-Code_hover.png')" src="img/QR-Code_hover.png" border="0"/>
 					</div>
-					<div align="center">Scan</div>
+					<div align="center" onmouseover="change('img2','img/QR-Code.png')" onmouseout="change('img2','img/QR-Code_hover.png')">Scan</div>
 				</a>
 			</div>
 			<div class="ui-block-b center">
-				<a class="ui-link menutitile" onclick="capturePhoto();">
+				<a class="ui-link menutitile" onclick="capturePhoto('Tools');">
 					<div align="center">
-						<img class="icon menuicon" src="img/Camera-R.png" />
+                        <img id="img3" class="icon menuicon" onmousedown="change('img3','img/Camera-R.png')" onmouseover="change('img3','img/Camera-R.png')" onmouseout="change('img3','img/Camera-R_hover.png')" src="img/Camera-R_hover.png" border="0"/>
 					</div>
-					<div align="center">Capture</div>
+					<div align="center" onmouseover="change('img3','img/Camera-R.png')" onmouseout="change('img3','img/Camera-R_hover.png')" src="img/Camera-R_hover.png">Capture</div>
 				</a>
 			</div>
 
 			<div class="ui-block-a center">
-				<a class="ui-link menutitile">
+				<a class="ui-link menutitile" onclick="getLocation('Tools');">
 					<div align="center">
-						<img class="icon menuicon" src="img/location.png"
-							onclick="getLocation();" />
+                        <img id="img4" class="icon menuicon" onmouseover="change('img4','img/location.png')" onmouseout="change('img4','img/location_hover.png')" src="img/location_hover.png" border="0"/>
+
 					</div>
-					<div align="center">Location</div>
+					<div align="center" onmouseover="change('img4','img/location.png')" onmouseout="change('img4','img/location_hover.png')" src="img/location_hover.png" >Location</div>
 				</a>
 			</div>
 			<div class="ui-block-b center">
-				 <a href="AddDisplay1.html?backId=iconsTools" class="ui-link menutitile">
+				 <a href="AddDisplay1.html" onclick="setBackButtonText('Tools');" class="ui-link menutitile">
 					<div align="center">
-						<img class="icon menuicon" src="img/ticket.png" />
+                        <img id="img5" class="icon menuicon" onmouseover="change('img5','img/ticket.png')" onmouseout="change('img5','img/ticket_hover.png')" src="img/ticket_hover.png" border="0"/>
 					</div>
-					<div align="center">Ticket</div>
+					<div align="center" onmouseover="change('img5','img/ticket.png')" onmouseout="change('img5','img/ticket_hover.png')">Ticket</div>
 				</a>
 			</div>
 		</div>

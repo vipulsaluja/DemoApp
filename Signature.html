@@ -6,15 +6,15 @@
 			class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a"
 			data-corners="true" data-shadow="true" data-iconshadow="true"
 			data-wrapperels="span"><span
-			class="ui-btn-inner ui-btn-corner-all"><span
-				class="ui-btn-text">Back</span></span></a>
+			class="ui-btn-inner ui-btn-corner-all"><span id="backSignature"
+				class="ui-btn-text" onclick="updateBackFlag();">Back</span></span></a>
 		<h3>Signature</h3>
-		<a data-theme="a" id="new"
+		<a data-theme="a" id="newSignature" style="display:none"
 			class="ui-btn-right ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a"
 			data-corners="true" data-shadow="true" data-iconshadow="true"
 			data-wrapperels="span"><span
 			class="ui-btn-inner ui-btn-corner-all"><span
-				class="ui-btn-text">New</span></span></a>
+				class="ui-btn-text" >New</span></span></a>
 	</div>
 	<div id="canvasContainer">
 		<canvas id="signature"></canvas>
@@ -36,7 +36,7 @@
 			data-corners="true" data-shadow="true" data-iconshadow="true"
 			data-wrapperels="span"><span
 			class="ui-btn-inner ui-btn-corner-all"><span
-				class="ui-btn-text">Done</span></span></a> <a id="cancel" data-theme="e"
+				class="ui-btn-text">Done</span></span></a> <a id="cancel" data-theme="a"
 			class="ui-btn-right cWhite"> Clear </a>
 		<h3></h3>
 	</div>

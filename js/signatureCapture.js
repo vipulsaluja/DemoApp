@@ -1,4 +1,3 @@
-
 // JavaScript Document
 var sigCapture = null;
 
@@ -6,7 +5,7 @@ $("#signaturePage").live("pageshow", function() {
 	sigCapture = new SignatureCapture( "signature" );	
 	$("#submit").click( onSubmitClick );
 	$("#cancel").click( onCancelClick );
-	$("#new").click( onNewClick );
+	$("#newSignature").click( onNewClick );
 });
 
 
@@ -24,7 +23,7 @@ function onSubmitClick( event ) {
 		submit.style.display = "none";
 		var cancel = document.getElementById('cancel');
 		cancel.style.display = "none";
-		var cancel = document.getElementById('new');
+		var cancel = document.getElementById('newSignature');
 		cancel.style.display = "block";
 }
 
@@ -36,7 +35,7 @@ function onNewClick( event) {
 	cancel.style.display = "block";
 	var canvasContainer = document.getElementById('canvasContainer');
 	canvasContainer.style.display = "block";
-	var cancel = document.getElementById('new');
+	var cancel = document.getElementById('newSignature');
 	cancel.style.display = "none";
 	var capturedSignature = document.getElementById('capturedSignature');
 	capturedSignature.style.display = "none";
@@ -75,6 +74,7 @@ function SignatureCapture( canvasID ) {
 	this.context.strokeStyle = "#000000";
 	this.context.lineWidth = 1;
 	this.lastMousePoint = {x:0, y:0};
+	
 	this.canvas[0].width = this.canvas.parent().innerWidth();
     
 	if (this.touchSupported) {

@@ -1,197 +1,77 @@
 @charset "utf-8";
 /* CSS Document */
 
+
+
+
 /*customized*/
-.ui-btn .iconCamera {
-	background: url(../img/iconSprite.png) no-repeat -14px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
+.ui-btn .iconCamera{ background:url(../img/iconSprite.png) no-repeat -14px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
+.ui-btn:hover .iconCamera{ background:url(../img/iconSprite.png) no-repeat -45px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
 
-.ui-btn:hover .iconCamera {
-	background: url(../img/iconSprite.png) no-repeat -45px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
+.ui-btn .iconscanning{ background:url(../img/iconSprite.png) no-repeat -80px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
+.ui-btn:hover .iconscanning{ background:url(../img/iconSprite.png) no-repeat -107px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
 
-.ui-btn .iconscanning {
-	background: url(../img/iconSprite.png) no-repeat -80px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
+.ui-btn .iconlocation{ background:url(../img/iconSprite.png) no-repeat -137px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
+.ui-btn:hover .iconlocation{ background:url(../img/iconSprite.png) no-repeat -162px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
 
-.ui-btn:hover .iconscanning {
-	background: url(../img/iconSprite.png) no-repeat -107px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
+.ui-btn .iconosevent{ background:url(../img/iconSprite.png) no-repeat -188px 0px; width:50px; height:18px; position:absolute; top:-18px; left:-10%;}
+.ui-btn:hover .iconosevent{ background:url(../img/iconSprite.png) no-repeat -188px -19px; width:50px; height:18px; position:absolute; top:-18px; left:-10%;}
 
-.ui-btn .iconlocation {
-	background: url(../img/iconSprite.png) no-repeat -137px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
 
-.ui-btn:hover .iconlocation {
-	background: url(../img/iconSprite.png) no-repeat -162px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
-
-.ui-btn .iconosevent {
-	background: url(../img/iconSprite.png) no-repeat -187px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
-
-.ui-btn:hover .iconosevent {
-	background: url(../img/iconSprite.png) no-repeat -214px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
-
-.ui-btn .iconticket {
-	background: url(../img/iconSprite.png) no-repeat -250px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
-
-.ui-btn:hover .iconticket {
-	background: url(../img/iconSprite.png) no-repeat -283px -7px;
-	width: 18px;
-	height: 18px;
-	position: absolute;
-	top: -21px;
-	left: 35%;
-}
+.ui-btn .iconticket{ background:url(../img/iconSprite.png) no-repeat -250px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
+.ui-btn:hover .iconticket{ background:url(../img/iconSprite.png) no-repeat -283px -7px; width:18px; height:18px; position:absolute; top:-21px; left:35%;}
 
 /*overwirght*/
-.ui-navbar .ui-btn-inner {
-	padding-top: 2.2em !important;
-}
 
-.ui-btn-innerlogout {
-	padding: 0.55em 11px 0.5em
-}
+.ui-navbar .ui-btn-inner{ padding-top:2.2em !important;}
+.ui-btn-innerlogout{ padding:0.55em 11px 0.5em}
 
-.ui-btn-active {
-	background: -moz-linear-gradient(center top, #ffa267, #f9823a) repeat
-		scroll 0 0 #4596CE !important;
-}
+.ui-btn-active{background: -moz-linear-gradient(center top , #ffa267, #f9823a) repeat scroll 0 0 #4596CE !important;}
 
-.gridwidthA {
-	width: 47% !important;
-}
 
-.gridwidthB {
-	width: 2% !important;
-	border-left: 1px solid #fff !important;
-}
+.gridwidthA{ width:47% !important;}
+.gridwidthB{ width:2% !important; border-left:1px solid #fff !important;}
+.gridwidthRow{ width:2% !important; border-left:1px solid #000 !important;}
 
-.gridwidthRow {
-	width: 2% !important;
-	border-left: 1px solid #000 !important;
-}
+.cWhite{ color:#fff !important;text-shadow:0 -1px 1px #000 !important;}
 
-.cWhite {
-	color: #fff !important;
-	text-shadow: 0 -1px 1px #000 !important;
-}
+div.ui-btn{ background:none !important; padding:0 !important;}
 
-div.ui-btn {
-	background: none !important;
-	padding: 0 !important;
-}
 
-.menuicon {
-	min-width: 50px;
-	min-height: 50px;
-	width: 20%;
-}
+.menuicon{ min-width:50px; min-height:50px;  width:25%; }
+.menuicon-zoom{ min-width:50px; min-height:50px;  width:50%; }
 
-.menutitile {
-	color: #496b9b !important;
-	text-decoration: none !important;
-}
+.menutitile{color:#496b9b !important;text-decoration:none!important; }
+div.center{padding:20px 0px;}
 
-input.ui-input-text {
-	border-radius: 0px 0px 0px 0px !important;
-}
+ input.ui-input-text {border-radius: 0px 0px 0px 0px !important;}
+.iconGeoLocation{ background:url(../img/gps_pin_location.png); width:18px; height:18px; position:absolute;}
 
-.iconGeoLocation {
-	background: url(../img/gps_pin_location.png);
-	width: 18px;
-	height: 18px;
-	position: absolute;
-}
+.customizedButton{display: inline-block;  left: 10px;  position: relative;   top: 0;}
+.customizedButton .ui-btn{border-radius:3px !important; top:-20px !important;}
+textarea.ui-input-text { width: 75% !important; display: inline-block;}
 
-.customizedButton {
-	display: inline-block;
-	left: 10px;
-	position: relative;
-	top: -11px;
-}
-
-.customizedButton .ui-btn {
-	border-radius: 3px !important;
-	top: -20px !important;
-}
-
-textarea.ui-input-text {
-	width: 75% !important;
-	display: inline-block;
-}
-
-a[data-rel='custom'],.ui-header a[data-rel='custom'] {
-	background: transparent url(images/backButtonSprite.png) 0 0 no-repeat
-		!important;
-	-webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
-	box-shadow: none !important;
-	-webkit-border-radius: 0 !important;
-	-moz-border-radius: 0 !important;
-	border-radius: 0 !important;
+a[data-rel='custom'], .ui-header a[data-rel='custom'] {
+	background: transparent url(images/backButtonSprite.png) 0 0 no-repeat !important;
+		-webkit-box-shadow: none !important; 
+		-moz-box-shadow: none !important; 
+		box-shadow: none !important;
+			-webkit-border-radius: 0 !important;
+			-moz-border-radius: 0 !important;
+			border-radius: 0 !important;
 	border: 0 none !important;
 	height: 30px;
 }
 
 a[data-rel='custom'] .ui-btn-inner {
-	background: transparent url(images/backButtonSprite.png) right 0
-		no-repeat !important;
+	background: transparent url(images/backButtonSprite.png) right 0 no-repeat !important;
 	margin: 0 0 0 15px;
 	padding: 0 8px 0 0 !important;
 	height: 30px;
 	line-height: 30px;
-	-webkit-box-shadow: none !important;
-	-moz-box-shadow: none !important;
-	box-shadow: none !important;
+		-webkit-box-shadow: none !important; 
+		-moz-box-shadow: none !important; 
+		box-shadow: none !important;
 }
 
 a[data-rel='custom'] .ui-icon {
@@ -202,22 +82,18 @@ a[data-rel='custom'] .ui-icon {
 .ui-bar-b a[data-rel='custom'] {
 	background-position: 0 -30px !important;
 }
-
 .ui-bar-b a[data-rel='custom'] .ui-btn-inner {
 	background-position: right -30px !important;
 }
 
-.ui-btn-hover-a,.ui-btn-down-a {
-	font-family: Helvetica, Arial, sans-serif /*{a-button-font}*/;
-	text-decoration: none;
-	border: 1px solid #222 !important;
-	background-image:-moz -linear-gradient(50% 0%, rgb(137, 160, 190) 0%, rgb(88, 119, 162) 50%, rgb(72, 106, 154) 51%, rgb(74, 108, 155) 100%);
-}
 .header
 {
 	position:fixed !important; 
 	z-index:999;
+	left: 0 !important;
 }
+
+#headerEditRecord{position:absolute; top:0; left:0;}
 
 .contentContainer
 {
@@ -229,8 +105,134 @@ a[data-rel='custom'] .ui-icon {
    font-weight: bold !important;
 }
 
-#headerEditRecord {
-    left: 0;
-    position: absolute;
-    top: 0;
+
+.ui-btn-hover-c-ticketRecors {
+    background: -moz-linear-gradient(center top , #DC7679 0%, #DC7679 49%, #CD2A27 50%, #C92A29 100%) repeat scroll 0 0 transparent; border-color: #451C1B; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.36), 0 1px 0 rgba(0, 0, 0, 0.25) inset !important;
+}
+
+
+div.redButton{   border-radius: 8px 8px 8px 8px; bottom: 15px !important; left: 30px!important; right:30px!important; position: absolute;}
+div.redButton span{
+    background: -moz-linear-gradient(center top , #E18285 0%, #D76369 49%, #CD2A27 50%, #BF2321 100%) repeat scroll 0 0 transparent; border-radius: 8px 8px 8px 8px;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E18285), color-stop(49%,#D76369), color-stop(50%,#CD2A27), color-stop(100%,#BF2321));
+}
+div.redButton span span{
+  	color: #FFFFFF;
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 0.75em;
+    overflow: hidden;
+    padding: 0.6em 20px;
+    position: relative;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+span.ui-pad{ padding:1px 12px!important;}
+span.ui-pad span{font-size:20px;}
+
+/*Zoom image START*/
+		.zoom {
+			display:inline-block;
+			position: relative;
+		}
+		
+		/* magnifying glass icon */
+		.zoom:after {
+			content:'';
+			display:block; 
+			width:33px; 
+			height:33px; 
+			position:absolute; 
+			top:0;
+			right:0;
+			background:url(icon.png);
+		}
+
+		.zoom img {
+			display: block;
+		}
+
+		.zoom img::selection { background-color: transparent; }
+
+		#ex2 img:hover { cursor: url(grab.cur), default; }
+		#ex2 img:active { cursor: url(grabbed.cur), default; }
+		
+/*Zoom image END*/
+
+.ui-header a.ui-btn-hover-a {
+   	background: -moz-linear-gradient(center top , #a3bcdd 0%, #688ec1 50%, #5880b8 51%, #5981b9 100%) repeat scroll 0 0 transparent!important;
+    border-color: #375074;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.36), 0 1px 0 rgba(0, 0, 0, 0.25) inset !important;
+    top: 6px;
+    color: #sdfdsf !important ;
+}
+.ui-header .ui-btn-hover-a {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#89A0BE/*{a-bhover-background-start}*/), to(#5877A2 /*{a-bhover-background-end}*/)) !important; /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #777 /*{a-bhover-background-start}*/, #454S /*{a-bhover-background-end}*/) !important; /* Chrome 10+, Saf5.1+ */
+}
+.ui-header a.ui-btn-down-a {
+   	background: -moz-linear-gradient(center top , #a3bcdd 0%, #688ec1 50%, #5880b8 51%, #5981b9 100%) repeat scroll 0 0 transparent!important;
+    border-color: #375074;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.36), 0 1px 0 rgba(0, 0, 0, 0.25) inset !important;
+    top: 6px;
+}
+
+
+.ui-header a.ui-btn-hover-e {
+   	background: -moz-linear-gradient(center top , #a3bcdd 0%, #688ec1 50%, #5880b8 51%, #5981b9 100%) repeat scroll 0 0 transparent!important;
+    border-color: #375074;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.36), 0 1px 0 rgba(0, 0, 0, 0.25) inset !important;
+    top: 6px;
+}
+
+.ui-header a.ui-btn-down-e {
+   	background: -moz-linear-gradient(center top , #a3bcdd 0%, #688ec1 50%, #5880b8 51%, #5981b9 100%) repeat scroll 0 0 transparent!important;
+    border-color: #375074;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.36), 0 1px 0 rgba(0, 0, 0, 0.25) inset !important;
+    top: 6px;
+}
+
+
+
+
+a:hover[data-rel="back"], .ui-header a:hover[data-rel="back"] {
+    background: url("images/backButtonSprite_hover.png") no-repeat scroll 0 0 transparent !important;
+    border: 0 none !important;
+    border-radius: 0 0 0 0 !important;
+    box-shadow: none !important;
+    height: 30px;
+}
+
+a:hover[data-rel="back"] .ui-btn-inner {
+    background: url("images/backButtonSprite_hover.png") no-repeat scroll right 0 transparent !important;
+    box-shadow: none !important;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 0 0 15px;
+    padding: 0 8px 0 0 !important;
+}
+
+
+.listDisplayRecord {
+	vertical-align: middle !important;
+}
+
+.listDisplayRecord a {
+	vertical-align: middle !important;
+}
+
+.listDisplayRecord span {
+	vertical-align: middle !important;
+}
+
+.hoverClass 
+{
+  font-size: 24px !important;	
 }

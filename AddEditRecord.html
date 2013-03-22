@@ -2,11 +2,10 @@
         <div data-role="page" id="editPage">
             <div id="headerEditRecord" data-theme="a" data-role="header" class="header">
                 <a data-theme="a" data-rel="back" class="ui-btn-left ui-btn ui-shadow ui-btn-corner-all ui-btn-up-a" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Back</span></span></a>
-                <a id="editFormSubmitButton" data-theme="e" class="ui-btn-right cWhite">
+                <a id="editFormSubmitButton" data-theme="a" class="ui-btn-right cWhite" onclick="updateBackFlag();">
                     Done
                 </a>
-                <h3>
-                </h3>
+                <h3 id="addEditTicketText">Add Ticket </h3>
             </div>
             <div data-role="content"  class="contentContainer">
 			<input type="hidden" name="noteId" id="noteId" value="">
@@ -39,13 +38,21 @@
                 </label>
                 <textarea name="" id="location" placeholder="" data-mini="true" data-inline="true" style="" disabled></textarea>
 				   <div class="customizedButton"> 
-				   <a id="editGeoLocation" data-transition="top" data-theme="a" onclick="getAndDisplayLocation();"><img src="img/locationButton.png" width="32" height="32" />
+				   <a id="editGeoLocation" data-transition="top" data-theme="a" onclick="getAndDisplayLocation();">
+                   <img id="imgA" width="64" height="64" onmousedown="change('imgA','img/locationButton_hover.png')" onmouseover="change('imgA','img/locationButton_hover.png')" onmouseup="change('imgA','img/locationButton.png')" onmouseout="change('imgA','img/locationButton.png')" src="img/locationButton.png" border="0"/>
 				   </a></div>	
                 </div>
             </fieldset>
         </div>
 
-            </div>
-               <!-- <input id="saveButton" type="submit" data-icon="check" data-iconpos="left" data-theme="b" value="Save" class="saveButton" data-inline="true"/>
+	</div>
+	<!-- <input id="saveButton" type="submit" data-icon="check" data-iconpos="left" data-theme="b" value="Save" class="saveButton" data-inline="true"/>
                 <input id="deleteButton" type="submit" data-icon="delete" data-iconpos="left" data-theme="b" value="Cancel" class="closeButton" data-inline="true"/>-->
-        </div>
+
+	<div id="deleteButton" class="redButton">
+		<span><span onclick="updateBackFlag();">Delete</span></span>
+	</div>
+
+
+
+</div>

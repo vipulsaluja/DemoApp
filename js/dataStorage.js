@@ -3,12 +3,15 @@ init();
 var flagBackIndex = false;
 var pageLocation = "";
 var siteId = 0;
+var timesClicked = 0;
+var deleteSelectedFlag = false;
+var deleteFlag = false;
+
+//Logging is done.
 function doLog(s){
-  
     setTimeout(function(){
         console.log(s);
-    }, 3000);
-    
+    }, 3000);    
 }
 
 function dbErrorHandler(err){
@@ -52,15 +55,76 @@ function renderEntries(tx,results){
 	//alert("render entries");
     doLog("render entries");
     if (results == null || results.rows == null || results.rows.length == 0) {
-        $("#mainContent").html("<p style='padding-left: 10px; padding-top: 10px;'>You currently do not have any tickets.</p>");
+        $("#mainContent").html("<p id='noRecords' style='text-align:center; width:100%; padding-top: 180px;'>You currently do not have any tickets.</p>");
+      //  centerHorizontallyRecords('mainContent');
+        $('#cancelDelete').hide();
+        $('#deleteSelectedButton').hide();
     } else {
        var s = "";
        for(var i=0; i<results.rows.length; i++) {
-         s += "<li style='border-radius: 0px !important'><a onclick='setSiteId("+ results.rows.item(i).id +")' id="+results.rows.item(i).id + " href='AddEditRecord.html?id="+results.rows.item(i).id + "'>" + results.rows.item(i).title + "</a></li>";   
+         s += "<li style='border-radius: 0px !important;' onclick='recordLiClick(this);' class='listDisplayRecord'>" +
+         		"<input onclick='recordCheckboxClick(this);' class='siteCheckbox' type='checkbox' id='chkSiteId_"+results.rows.item(i).id +"' style='display:none !important; padding-left: 5px; width: 30px;' />" +
+         		"<a style='display:inline-block !important;' onclick='setSiteId("+ results.rows.item(i).id +")' id='"+results.rows.item(i).id + "'>" + results.rows.item(i).title + "</a></li>";   
        }
        $("#noteTitleList").html(s);
        $("#noteTitleList").listview("refresh");
+       $('#deleteSelectedButton').show();
+       $('#cancelDelete').hide();
     }
+}
+
+function recordClick(id) {
+	setBackButtonText("Tickets");
+	if(!deleteSelectedFlag)
+		{
+		$('#addEditTicketText').html("Edit Ticket");	
+	    siteId = results.rows.item(i).id;
+		deleteFlag = true;
+		$.mobile.changePage("AddEditRecord.html?id="+results.rows.item(i).id);
+	   
+		}
+	else
+		{
+		var element = $("#chkSiteId_"+id);
+		if (element.checked == true)  {
+			element.checked = false ;			
+		  }
+		else {
+		     element.checked = true;
+		}
+	}
+}
+
+function recordLiClick(liObject) {
+	setBackButtonText("Tickets");
+	if(!deleteSelectedFlag)
+	{
+		$('#addEditTicketText').html("Edit Ticket");	
+	    siteId = liObject.getElementsByTagName("a")[0].id;
+		deleteFlag = true;
+		$.mobile.changePage("AddEditRecord.html?id="+liObject.getElementsByTagName("a")[0].id);
+	}
+else
+	{
+	   var element = liObject.getElementsByClassName("siteCheckbox")[0];
+	 if (element.checked == true)  {
+			element.checked = false ;			
+		  }
+		else {
+		     element.checked = true;
+		}
+	}
+}
+
+function recordCheckboxClick(chkObj)
+{
+	setBackButtonText("Tickets");
+	 if (chkObj.checked == true)  {
+		     chkObj.checked = false ;			
+	}
+		else {
+			chkObj.checked = true;
+		}
 }
 
 function saveNote(note, cb) {
@@ -72,13 +136,33 @@ function saveNote(note, cb) {
     }, dbErrorHandler,cb);
 }
 
+//Delete single record
+
+function deleteNote(siteId, cb) {
+    //Sometimes you may want to jot down something quickly....
+	//dblog(siteId);
+    dbShell.transaction(function(tx) {
+      tx.executeSql("delete from Tickets  where id=?",[siteId]);
+    }, dbErrorHandler,cb);
+}
+
+//Delete Multiple Records
+function deleteMultiple(ids, cb) {
+    //Sometimes you may want to jot down something quickly....
+	//dblog(siteId);
+	var query = "delete from Tickets  where id in ("+ids+")";
+    dbShell.transaction(function(tx) {
+      tx.executeSql(query);
+    }, dbErrorHandler,getEntries);
+}
+
 function init(){
 	//alert("Init called");
      phoneReady();
-    
-  //  openDB();
     $("#editPage").live("pageshow", function() {
-    //	alert("Before submit");
+    	$("#noteTitle").focus();
+    	 
+       //When we save the records
     	$("#editFormSubmitButton").click(function() { 
     		if($("#noteTitle").val() != "") {
     	        var data = {title:$("#noteTitle").val(), 
@@ -91,6 +175,8 @@ function init(){
     		        saveNote(data,function() {
     		            $.mobile.changePage("AddDisplay1.html",{ reverse:true,  changeHash: false});
     		        });
+    		    //Hide delete Button
+    		        $('deleteButton').hide();
     	        e.preventDefault();
     		//	$("#editNoteForm").submit();  
     		}
@@ -100,8 +186,17 @@ function init(){
         	  $("#noteTitle").focus()
         	}
     	 });
-    //	alert("After submit");
-        //get the location - it is a hash - got to be a better way
+    	
+    	//Click on delete button on edit page.
+    	$("#deleteButton").click(function() { 
+    		if(siteId != "") {
+    		        deleteNote(siteId,function() {
+    		            $.mobile.changePage("AddDisplay1.html",{ reverse:true,  changeHash: false});
+    		        });
+    	        e.preventDefault();  
+    		}
+    	 });
+
         var loc = window.location.hash;
         if(loc.indexOf("?") >= 0 || siteId != 0) {
             var qs = loc.substr(loc.indexOf("?")+1,loc.length);
@@ -141,29 +236,75 @@ function init(){
          $("#editFormSubmitButton").removeAttr("disabled");   
         }
     });
-      
+     
+    $("#editPage").live("pagebeforeshow", function() {
+    	//toshow delete button or not.
+   	 if(deleteFlag == true) {
+   		// alert(deleteFlag);
+   		 $("#deleteButton").show();
+   		 $('#addEditTicketText').html("Edit Ticket");
+   	 }
+   	 else {
+   		 $("#deleteButton").hide();
+   		 $('#addEditTicketText').html("Add Ticket");
+   	  }
+    });
     //will run after initial show - handles regetting the list
     $("#displayPage1").live("pageshow", function() {
-    //	alert("Display page loaded");
-/*		var loc = window.location.hash;
-        if(loc.indexOf("?") >= 0) {
-        	if( !flagBackIndex) {
-            var qs = loc.substr(loc.indexOf("?")+1,loc.length);
-            var backId = qs.split("=")[1];
-        //    alert(backId);
-            if(backId == "index") {
-            	pageLocation = "index.html";	    	
-            }
-            else
-            	{
-            	pageLocation= "IconsTools.html";
-            	}
-        	}
-        	flagBackIndex = true;
-        }
-        $("#backId").href = pageLocation ;*/
+    	$("#addRecordId").click(function() { 
+    		deleteFlag = false;
+    		siteId = 0;
+    		$('#cancelDelete').hide();
+    	 });  	
+    	$("#cancelDelete").click(function() { 
+    		siteId = 0;
+    		deleteSelectedFlag = false;
+    		hideAllCheckboxes();
+			ShowRightIcon();
+    		$('#cancelDelete').hide();
+    	 }); 
+    	
+    	
+    	hideAllCheckboxes();
+    	ShowRightIcon()
+    	$("#deleteSelectedButton").click(function() { 
+    		if(!deleteSelectedFlag) {
+    			//User is shown checkbox to select the record
+	    		deleteSelectedFlag = true;
+	    		$('#cancelDelete').show();
+		    		$('.siteCheckbox').each(function () {
+		    			// doLog("Show");
+		    			var element = document.getElementById(this.id);
+		    			element.style.display = '';
+		    			element.checked = false;
+		     	  });
+		    	HideRightIcon();
+    		 }
+    		else {
+    			deleteSelectedFlag = false;
+    			ShowRightIcon();
+    			var idList="";
+    			//Permanently delete the selected records  			 
+    			 $(".siteCheckbox:checked").each(function() {
+    				 idList = idList + this.id.substring(10, this.id.length) + "," ; 
+    			  });
+    			 if(idList != "") {
+    				 idList = idList.substring(0, idList.length - 1);
+    				 deleteMultiple(idList);
+    				 $('#cancelDelete').hide();
+    			 }
+    			 else 
+    				 {
+    				      hideAllCheckboxes();
+    				      $('#cancelDelete').hide();
+    				 }
+    		}
+    	 });
+    	   	 
         getEntries(); 
     });
+    //edit page logic needs to know to get old record (possible)
+   //  getEntries();
     $("#locationPage").live("pageshow", function() {
         //	alert("Display page loaded");
     	getLocation();
@@ -174,25 +315,21 @@ function init(){
     	var signature = $("#signature");
     	var canvasContainer = $("#canvasContainer");
 		var imageSignature = $("#imageSignature");
-    	var signatureHeader = $("#signatureHeader");
     	var footerSignature = $("#footerSignature");
     		var windowH = $(window).height();
     		var windowW = $(window).width();
     		signature.css({
-    		 height : windowH - signatureHeader.height() - footerSignature.height(),
+    		 height : windowH - footerSignature.height(),
     		})
     		canvasContainer.css({
-    		 height : windowH - signatureHeader.height() - footerSignature.height(),
+    		 height : windowH - footerSignature.height(),
     		 width : signature.width(),
     		})
     		imageSignature.css({
-    		 height : windowH - signatureHeader.height() - footerSignature.height(),
+    		 height : windowH - footerSignature.height(),
     		})    	    
-        });
-    
-    //edit page logic needs to know to get old record (possible)
-   //  getEntries();
-    
+        });    
+	 
 }
 
 
@@ -231,4 +368,76 @@ function toFixed(value, precision) {
 function setSiteId(valSiteId)
 {
 	siteId = valSiteId;
+	//alert("setSite");
+	deleteFlag = true;
+	recordClick(valSiteId);
+}
+
+function centerEmptyText(objectID) 
+{
+    var thisObj = document.getElementById(objectID);
+    var width = (window.innerWidth) ? window.innerWidth :   document.body.clientWidth;
+	var height = (window.innerHeight) ? window.innerHeight :   document.body.clientHeight;
+	//alert("clientHeight   " + document.body.clientHeight);
+	
+    var objectWidth = parseInt(thisObj.style.width);
+    var objectHeight = parseInt(thisObj.style.height);
+	//alert(objectHeight);
+	
+
+    var newLocation = (width - objectWidth) / 2;
+	var newLocationH = (height - objectHeight) / 2;
+	
+	//alert( newLocationH);
+	newLocation=newLocation+10;
+	//newLocationH=newLocationH+550;
+    //thisObj.style.left = newLocation +'px';
+	doLog(LocationH);
+    thisObj.style.top = (newLocationH - 10) +'px';
+   // thisObj.style.left = (newLocation - 10) +'px';
+	
+}
+
+function hideAllCheckboxes() {
+	$('.siteCheckbox').each(function () {
+		var element = document.getElementById(this.id);
+		element.style.display = 'none';
+	  });
+} 
+
+function HideRightIcon()
+{
+	
+	   $(".listDisplayRecord").each( function() {
+			  $(this).removeClass('ui-btn-icon-right');
+		});
+}
+
+function ShowRightIcon()
+{
+	
+	   $(".listDisplayRecord").each( function() {
+			  $(this).addClass('ui-btn-icon-right');
+		});
+}
+
+function centerHorizontallyRecords(objectID) 
+{
+    var thisObj = document.getElementById(objectID);
+    var width = (window.innerWidth) ? window.innerWidth :   document.body.clientWidth;
+	var height = (window.innerHeight) ? window.innerHeight :   document.body.clientHeight;
+	//alert("clientHeight   " + document.body.clientHeight);
+	
+    var objectWidth = parseInt(thisObj.style.width);
+    var objectHeight = parseInt(thisObj.style.height);
+	//alert(objectHeight);
+	
+
+    var newLocation = (width - objectWidth) / 2;
+	var newLocationH = (height - objectHeight) / 2;
+
+    thisObj.style.top = newLocationH + 15 + 'px';
+    thisObj.style.left = (newLocation - 70) +'px';
+    alert(newLocationH+ "   " + this.id);
+
 }
