@@ -16,7 +16,7 @@ function doLog(s){
 }
 
 function dbErrorHandler(err){
-    alert("DB Error: "+err.message + "\nCode="+err.code);
+  //  alert("DB Error: "+err.message + "\nCode="+err.code);
 }
 
 function phoneReady(){
